@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useGlobalContext } from "../context";
+import { domain_url } from "../context";
 
 function Pagination() {
   const {
@@ -40,9 +41,7 @@ function Pagination() {
       const fetchData = async () => {
         const stRow = startRow - 10; //create this variable to avoid Promises hell
         await axios
-          .get(
-            `http://localhost:5001/api/user?q=${searchKey}&start=${stRow}&limit=10`
-          )
+          .get(`${domain_url}/api/user?q=${searchKey}&start=${stRow}&limit=10`)
           .then((res) => {
             if (res.data === "No Data") {
               console.log("No Data");
@@ -64,9 +63,7 @@ function Pagination() {
     const fetchData = async () => {
       const stRow = startRow + 10; //create this variable to avoid Promises hell
       await axios
-        .get(
-          `http://localhost:5001/api/user?q=${searchKey}&start=${stRow}&limit=10`
-        )
+        .get(`${domain_url}/api/user?q=${searchKey}&start=${stRow}&limit=10`)
         .then((res) => {
           if (res.data === "No Data") {
             //  console.log("No Data, cannot go next");
@@ -89,32 +86,31 @@ function Pagination() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className='flex flex-col items-center'>
       {/* Help text */}
-      <span className="text-sm text-gray-700 dark:text-gray-400">
+      <span className='text-sm text-gray-700 dark:text-gray-400'>
         Showing{" "}
-        <span className="font-semibold text-gray-900 dark:text-white">
+        <span className='font-semibold text-gray-900 dark:text-white'>
           {startRow + 1}
         </span>{" "}
         to{" "}
-        <span className="font-semibold text-gray-900 dark:text-white">
+        <span className='font-semibold text-gray-900 dark:text-white'>
           {startRow + rows.length}
         </span>
       </span>
-      <div className="inline-flex mt-2 mb-2 xs:mt-0">
+      <div className='inline-flex mt-2 mb-2 xs:mt-0'>
         {/* Buttons */}
         <button className={buttonPrevPagClassName} onClick={handlePrev}>
           <svg
-            aria-hidden="true"
-            className="w-5 h-5 mr-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            aria-hidden='true'
+            className='w-5 h-5 mr-2'
+            fill='currentColor'
+            viewBox='0 0 20 20'
+            xmlns='http://www.w3.org/2000/svg'>
             <path
-              fillRule="evenodd"
-              d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-              clipRule="evenodd"
+              fillRule='evenodd'
+              d='M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z'
+              clipRule='evenodd'
             />
           </svg>
           Prev
@@ -122,16 +118,15 @@ function Pagination() {
         <button className={buttonNextPagClassName} onClick={handleNext}>
           Next
           <svg
-            aria-hidden="true"
-            className="w-5 h-5 ml-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            aria-hidden='true'
+            className='w-5 h-5 ml-2'
+            fill='currentColor'
+            viewBox='0 0 20 20'
+            xmlns='http://www.w3.org/2000/svg'>
             <path
-              fillRule="evenodd"
-              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
+              fillRule='evenodd'
+              d='M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z'
+              clipRule='evenodd'
             />
           </svg>
         </button>

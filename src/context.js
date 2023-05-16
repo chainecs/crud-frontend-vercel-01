@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 const AppContext = React.createContext();
+export const domain_url = "https://crowded-poncho-elk.cyclic.app/";
 
 const AppProvider = ({ children }) => {
   const [rows, setRows] = useState([]);
@@ -17,9 +18,7 @@ const AppProvider = ({ children }) => {
 
   const deleteRow = async (userId) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:5001/api/user/${userId}`
-      );
+      const response = await axios.delete(`${domain_url}/api/user/${userId}`);
       setDeleteModalVisible(false);
       alert(response.data);
       window.location.reload();
@@ -31,15 +30,12 @@ const AppProvider = ({ children }) => {
   const editRow = async (editDetails) => {
     const { userId, name, age, email, avatarUrl } = editDetails; //To avoid Object Object in console
     try {
-      const response = await axios.put(
-        `http://localhost:5001/api/user/${userId}`,
-        {
-          name: name,
-          age: age,
-          email: email,
-          avatarUrl: avatarUrl,
-        }
-      );
+      const response = await axios.put(`${domain_url}/api/user/${userId}`, {
+        name: name,
+        age: age,
+        email: email,
+        avatarUrl: avatarUrl,
+      });
 
       if (response.data === "Email is already in use")
         alert("Email is already in use");
@@ -76,8 +72,7 @@ const AppProvider = ({ children }) => {
         setButtonPrevPagClassName,
         buttonNextPagClassName,
         setButtonNextPagClassName,
-      }}
-    >
+      }}>
       {children}
     </AppContext.Provider>
   );

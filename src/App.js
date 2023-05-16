@@ -5,6 +5,7 @@ import axios from "axios";
 import SearchBox from "./components/SearchBox";
 import Pagination from "./components/Pagination";
 import Table from "./components/Table";
+import { domain_url } from "./context";
 
 function App() {
   const { setRows, searchKey, setStartRow } = useGlobalContext();
@@ -13,9 +14,7 @@ function App() {
     const fetchData = async () => {
       const stRow = 0; //create this variable to avoid Promises hell
       await axios
-        .get(
-          `http://localhost:5001/api/user?q=${searchKey}&start=${stRow}&limit=10`
-        )
+        .get(`${domain_url}/api/user?q=${searchKey}&start=${stRow}&limit=10`)
         .then((res) => {
           if (res.data === "No Data") {
             console.log("No Data");
